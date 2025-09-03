@@ -4,3 +4,70 @@
 *:after {
   box-sizing: border-box;
 }
+html {
+    background-image: url('../images/site/checkerboard.jpg');
+    min-width: 380px;
+}
+body {
+    max-width: 1200px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 20px;
+    border: 5px solid rgb(9, 158, 227);
+    border-radius: 10px;
+    max-width: 920px;
+}
+.flex {
+  display: block;
+  flex: 1;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.grid {  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  min-width: 300px;
+}
+.container, .list{
+  flex: 1 !important;
+  padding: 0 10px;
+}
+
+.feat{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.img-container {
+  background-color: rgb(9, 158, 227);
+  padding: 10px 60px;
+  border: 2px solid black;
+  width: 180px;
+  height: 90px;
+}
+.list ul li {
+  font-size: 1.2rem;
+  margin-left: 0;
+  list-style: disc;
+  padding-bottom: 20px;
+  font-weight: 600;
+}
+.list ul {
+  padding-left: 20px;
+}
+.list {
+   margin-top: 50px;
+   min-width: 300px;
+}
+.flex h2 {
+  margin-bottom: 3rem;
+}
+footer {
+  margin-top: 5rem;
+}
+

@@ -1,0 +1,104 @@
+header {
+    font-family: 'Roboto', sans-serif;
+}
+a, li {
+    text-decoration: none;
+    color: inherit;
+}
+#top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0.2rem;
+    margin-bottom: 2rem;
+}
+.siteName {
+    font-size: 2em;
+    font-weight: bold;
+}
+#tools a {
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: none;
+}
+.tools a:first-child {
+    font-size: 0.4rem;
+    font-weight: 600;
+}
+#hamburger::before {
+    content: "☰";
+    font-size: 1.75rem;
+    display: block;
+    font-weight: bold;
+}
+#hamburger.open::before {
+    content: "X";
+    font-size: 1.75rem;
+    display: block;
+    font-weight: bold;
+}
+nav ul {
+    display: none;
+    text-align: left;
+    padding: 0.6rem;
+}
+nav ul.show {
+    display: block;
+}
+
+ul li {    
+    list-style: none;
+    color: black;
+    font-size: 1.5rem;  
+    padding-bottom: 3px; 
+}
+ul li:hover {
+    color: rgb(15, 156, 226);
+    cursor: pointer;
+}
+.banner {
+  background-image: url('../images/vehicles/delorean.jpg');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 300px;
+}
+.specs {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 5px;
+  width: fit-content;
+  margin-left: 5rem;
+  text-align: center;
+  color: rgb(15, 156, 226);
+}
+.specs h2 {
+  white-space: nowrap;
+  text-align: left;
+  padding-top: 0;
+  font-size: 2rem;
+  margin-bottom: 10px;  
+}
+.specs p {
+  text-align: left;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  margin: 2px;
+}
+#call-to-action {
+  background-color: rgb(9, 158, 227);
+  color: white;
+  font-size: large;
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 20px;
+}
+main h1 {
+    display: none;
+}

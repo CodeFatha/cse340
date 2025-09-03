@@ -1,0 +1,42 @@
+@media (min-width: 540px) {
+  nav ul{
+    display: flex !important;
+    justify-content: space-evenly;
+    background-color: rgb(26, 24, 24);
+    padding: 0.6rem;
+    font-size: 1rem !important;
+  }
+  nav ul li {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    padding-bottom: 0;
+  }
+  nav ul li a:hover {
+    color: rgb(129, 213, 254);
+  }
+  nav ul.show {
+    display: flex;
+  }
+  #hamburger {
+    display: none;
+  }
+  #tools a {
+    display: block !important;
+  }
+  nav ul li:last-child {
+    display: none;
+  }
+  main h1 {
+    display: block !important;
+  }
+  .first {
+    font-size: 1rem;
+  }
+  .flex {
+    display: flex;
+  }
+  .list {
+    margin-top: 0;
+  }
+}
