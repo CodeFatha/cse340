@@ -21,7 +21,8 @@ body {
     max-width: 920px;
 }
 .flex {
-  display: block;
+  display: flex;
+  flex-direction: column-reverse;
   flex: 1;
   flex-wrap: wrap;
   margin-top: 2rem;
