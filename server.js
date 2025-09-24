@@ -8,8 +8,12 @@
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
-const app = express()
 const static = require("./routes/static")
+const inventory = require("./routes/inventoryRoute")
+const errorRoutes = require("./routes/errorRoutes")
+const baseController = require("./controllers/baseController")
+const utilities = require("./utilities")
+const app = express()
 
 
 /* ***********************
@@ -39,6 +43,11 @@ app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
 // Index route
-app.get("/", function(req, res) {
-  res.render("index", { title: "Home" })
+app.get("/", baseController.buildHome)
+//Inventory route
+app.use("/inv", inventory)
+app.use("/error", errorRoutes)
+app.use(async (req, res) => {
+  const nav = await utilities.getNav()
+  res.status(404).render("404", { title: "Error 404" , nav})
 })

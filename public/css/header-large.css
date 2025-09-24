@@ -24,9 +24,6 @@
   #tools a {
     display: block !important;
   }
-  nav ul li:last-child {
-    display: none;
-  }
   main h1 {
     display: block !important;
   }
