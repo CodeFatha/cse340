@@ -1,0 +1,43 @@
+<% if (title) { %>
+<h1 id="heading"><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+<%- messages()  %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div class="form">
+    <form id="loginForm" action="/inv/add-vehicle" method="post">
+        <label for="classification-select">Classification<span>*</span></label>
+        <select name="classification_id" id="classification-select" required>
+            <option value="" disabled selected hidden>Select A Classification</option>
+            <% classifications.rows.forEach(cl => { %>
+                <option value="<%= cl.classification_id %>"><%= cl.classification_name %></option>
+            <% }) %>
+        </select>
+        <label for="make">Make<span>*</span></label>
+        <input type="text" name="inv_make" id="make" required placeholder="E.g Toyota">
+        <label for="model">Model<span>*</span></label>
+        <input type="text" name="inv_model" id="model" required placeholder="E.g Corolla">
+        <label for="description">Description<span>*</span></label>
+        <textarea id="description" name="inv_description" rows="4" cols="63" required placeholder="Enter a short description"></textarea>
+        <label for="image-path">Image Path:</label>
+        <input type="text" name="inv_image" id="image-path" placeholder="E.g /images/vehicles/example.jpg">
+        <label for="thumbnail-path">Thumbnail Path:</label>
+        <input type="text" name="inv_thumbnail" id="thumbnail-path" placeholder="E.g /images/vehicles/example-thumbnail.jpg">
+        <label for="price">Price<span>*</span></label>
+        <input type="number" name="inv_price" id="price" required placeholder="Figure only, leave out currency">
+        <label for="year">Year<span>*</span></label>
+        <input type="number" name="inv_year" id="year" required placeholder="Make year" min="1940" max="2025">
+        <label for="miles">Miles<span>*</span></label>
+        <input type="number" name="inv_miles" id="miles" required placeholder="Current odometer reading">
+        <label for="color">Color<span>*</span></label>
+        <input type="text" name="inv_color" id="color" required placeholder="Color of the vehicle">
+        <button type="submit">Add Vehicle</button>
+    </form>
+</div>

@@ -1,11 +1,26 @@
 const invModel = require("../models/inventory-model")
+const classModel = require("../models/classification-model")
 const Util = {}
+
+/* ****************************************
+* Middleware to handle async route errors
+* **************************************** */
+Util.handleErrors = function(controller) {
+  return async (req, res, next) => {
+    try {
+      await controller(req, res, next)
+    } catch (err) {
+      console.error("Route error:", err)
+      next(err)
+    }
+  }
+}
 
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
 Util.getNav = async function (req, res, next) {
-  let data = await invModel.getClassifications()
+  let data = await classModel.getClassifications()
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {

@@ -1,0 +1,80 @@
+const utilities = require(".")
+const { body, validationResult } = require("express-validator")
+const classModel = require("../models/classification-model")
+const validate = {}
+
+validate.inventoryRules = () => {
+    return [
+        body("inv_make")
+          .trim()
+          .escape()
+          .notEmpty()
+          .isLength({ min: 1 })
+          .withMessage("Please provide inventory make."),
+        
+        body("inv_model")
+          .trim()
+          .escape()
+          .notEmpty()
+          .isLength({ min: 1 })
+          .withMessage("Please provide inventory model."),
+        
+        body("inv_description")
+          .trim()
+          .escape()
+          .notEmpty()
+          .isLength({ min: 1 })
+          .withMessage("Please provide inventory description."),
+        
+        body("inv_year")
+          .trim()
+          .isInt({ min:1940, max:2024 })
+          .withMessage("Please provide inventory year."),
+
+          body("inv_color")
+          .trim()
+          .escape()
+          .notEmpty()
+          .isLength({ min: 1 })
+          .withMessage("Please provide inventory color."),
+
+          body("inv_price")
+          .trim()
+          .notEmpty()
+          .isFloat()
+          .withMessage("Please provide inventory price."),
+
+          body("inv_miles")
+          .trim()
+          .notEmpty()
+          .isFloat()
+          .withMessage("Please provide inventory miles."),
+
+          body("classification_id")
+          .trim()
+          .notEmpty()
+          .isInt()
+          .withMessage("Please provide class ID."),
+    ]
+}
+
+validate.checkInvData = async (req, res, next) => {
+  const { inv_make, inv_model, inv_description, inv_year, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    const classifications = await classModel.getClassifications()
+    console.log(`Classifications returned: ${classifications}`)
+    res.render("inventory/add-vehicle", {
+      errors,
+      title: "Add Vehicle",
+      nav,
+      classifications,
+    })
+    return
+  }
+  next()
+}
+
+module.exports = validate

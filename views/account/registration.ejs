@@ -1,0 +1,28 @@
+<% if (title) { %>
+<h1 id="heading"><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+<%- messages()  %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div class="form">
+    <form action="/account/register" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="account_firstname" id="name" required placeholder="Enter your name" value="<%= locals.account_firstname %>">
+        <label for="surname">Surname:</label>
+        <input type="text" name="account_lastname" id="surname" required placeholder="Enter your surname">
+        <label for="email">Email:</label>
+        <input type="email" name="account_email" id="email" required placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        <label for="password">Password:</label>
+        <input type="password" name="account_password" id="password" required placeholder="Enter a password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        <button type="submit">Register</button>
+    </form>
+    
+    <p id="sign-up">Already have an account? <a href="login">Login</a></p>
+</div>

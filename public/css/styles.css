@@ -186,10 +186,82 @@ footer a {
   color: blue;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form label {
+  align-self: start;
+}
+
+form input, form textarea, form select {
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 7px;
+}
+
+form button {
+  font-size: large;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.form a {
+  text-decoration: underline;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  background-color: darkslategrey;
+  padding: 20px;
+  margin: 10px;
+  color: aliceblue;
+  border-radius: 20px;
+}
+
+#sign-up {
+  text-align: end;
+}
+
+#heading {
+  text-align: center;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.links a {
+  color: blue;
+  text-decoration: underline;
+  font-size: large;
+}
+
+label span {
+  color: rgb(236, 43, 43);
+}
+
+form input:invalid:not(:placeholder-shown) {
+  background-color: rgb(228, 162, 162);
+}
+
+form input:valid:not(:placeholder-shown) {
+  background-color: rgb(178, 255, 178);
+}
+
 @media (min-width: 540px) {
   .detail {
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
+  }
+
+  .form {
+    width: 60%;
   }
 }
