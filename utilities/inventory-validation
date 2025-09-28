@@ -65,7 +65,6 @@ validate.checkInvData = async (req, res, next) => {
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
     const classifications = await classModel.getClassifications()
-    console.log(`Classifications returned: ${classifications}`)
     res.render("inventory/add-vehicle", {
       errors,
       title: "Add Vehicle",
