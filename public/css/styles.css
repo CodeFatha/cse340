@@ -123,10 +123,6 @@ footer {
 .info h2 {
   margin-top: 0;
 }
-.car-link {
-  text-decoration: underline;
-  color: blue;
-}
 
 #inv-display {
   display: grid;
@@ -181,11 +177,6 @@ footer {
   background-repeat: no-repeat;
 }
 
-footer a {
-  text-decoration: underline;
-  color: blue;
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -237,8 +228,6 @@ form button {
 }
 
 .links a {
-  color: blue;
-  text-decoration: underline;
   font-size: large;
 }
 
@@ -252,6 +241,12 @@ form input:invalid:not(:placeholder-shown) {
 
 form input:valid:not(:placeholder-shown) {
   background-color: rgb(178, 255, 178);
+}
+
+select {
+  padding: 7px;
+  width: 12rem;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 540px) {

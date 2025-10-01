@@ -1,7 +1,7 @@
 header {
     font-family: 'Roboto', sans-serif;
 }
-a, li {
+nav a, li {
     text-decoration: none;
     color: inherit;
 }
