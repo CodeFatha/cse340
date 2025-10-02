@@ -21,12 +21,30 @@ async function buildRegistration(req, res, next) {
     })
 }
 
+async function buildAccountEdit(req, res, next) {
+    let nav  = await util.getNav()
+    const name = res.locals.accountData.account_firstname
+    res.render("account/edit", {
+        title: "Edit " + name,
+        nav,
+        errors: null,
+    })
+}
+
+async function buildAccountIndex(req, res, next) {
+    let nav  = await util.getNav()
+    res.render("account/", {
+        title: "Account Management",
+        nav,
+        errors: null,
+    })
+}
+
 /* ****************************************
 *  Process Registration
 * *************************************** */
 async function registerAccount(req, res) {
 
-    console.log(req.body)
     let nav = await util.getNav()
     const { account_firstname, account_lastname, account_email, account_password } = req.body
 
@@ -96,7 +114,7 @@ async function accountLogin(req, res) {
       return res.redirect("/account/")
     }
     else {
-      req.flash("message notice", "Please check your credentials and try again.")
+      req.flash("message notice", "The password you entered is incorrect")
       res.status(400).render("account/login", {
         title: "Login",
         nav,
@@ -109,4 +127,50 @@ async function accountLogin(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin }
+async function updateAccount(req, res) {
+  try {
+  let nav = await util.getNav()
+  const { account_firstname, account_lastname, account_email } = req.body 
+  const account_id = res.locals.accountData.account_id
+  const updateResult = await accountModel.updateAccount(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+  )
+  if (updateResult) {
+    const accountData = await accountModel.getAccountByEmail(account_email)
+    res.locals.accountData = accountData
+    delete accountData.account_password
+    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+    res.status(200).render("account/", {
+      title: "Account Management",
+      nav,
+      errors: null,
+    })
+  }
+  } catch (error) {
+    console.error(error)
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/edit", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+async function accountLogout(req, res) {
+  let nav = await util.getNav()
+  res.clearCookie("jwt")  
+  res.locals.loggedin = false
+  res.locals.accountData = null
+  req.flash("notice", "You have been logged out.")
+  res.status(200).render("account/login", {
+    title: "Login",
+    nav,
+    errors: null,
+  })
+}
+
+module.exports = { buildLogin, buildRegistration, buildAccountIndex, registerAccount, accountLogin, accountLogout, buildAccountEdit, updateAccount }

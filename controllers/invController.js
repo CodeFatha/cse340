@@ -62,7 +62,6 @@ invCont.buildEditVehicle = async function (req, res, next) {
   const vehicle = await invModel.getInventoryById(inv_id)
   const vehicle_name = `${vehicle.inv_make} ${vehicle.inv_model}`
   const classification = await classModel.getClassificationById(vehicle.classification_id)
-  console.log(`Classification: ${JSON.stringify(classification)}`)
   res.render("./inventory/edit-vehicle", {
    title: "Edit " + vehicle_name,
     nav,

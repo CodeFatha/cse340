@@ -3,7 +3,17 @@
         <a href="/" title="Return to home page">CSE Motors</a>
     </span>
     <div id="tools">
+        <div id="account">
+            <% if (typeof accountData !== 'undefined' && accountData) { %>
+                <p id="username"><%= accountData.account_firstname %> <%= accountData.account_lastname %></p>
+                <p id="role">(<%= accountData.account_type %>)</p>
+            <% } %>
+        </div>
+        <% if (typeof loggedin !== 'undefined' && loggedin) { %>
+            <a title="Click to log out" href="/account/logout">LOGOUT</a>
+            <% } else { %> 
         <a title="Click to log in" href="account/login"><span class="first">M</span>Y <span class="first">A</span>CCOUNT</a>
+        <% } %>
     </div>
     <a id="hamburger"></a>
 </header>

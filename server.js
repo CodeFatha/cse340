@@ -69,14 +69,15 @@ app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
 // Index route
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 app.get("/", baseController.buildHome)
 //Inventory route
 app.use("/inv", inventory)
 app.use("/error", errorRoutes)
 app.use("/account", accountRoute)
 app.use("/classification", classification)
-app.use(cookieParser())
-app.use(utilities.checkJWTToken)
+
 app.use(async (req, res) => {
   const nav = await utilities.getNav()
   res.status(404).render("404", { title: "Error 404" , nav})

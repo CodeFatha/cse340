@@ -101,6 +101,16 @@ Util.buildClassificationList = async function() {
   return list
 }
 
+
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please login")
+    return res.redirect("/account/login")
+  }
+}
+
 Util.checkJWTToken = (req, res, next) => {
  if (req.cookies.jwt) {
   jwt.verify(

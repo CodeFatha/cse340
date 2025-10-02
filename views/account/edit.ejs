@@ -1,0 +1,25 @@
+<% if (title) { %>
+<h1 id="heading"><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+<%- messages()  %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div class="form">
+    <form action="/account/update" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="account_firstname" id="name" required  value="<%= accountData.account_firstname %>">
+        <label for="surname">Surname:</label>
+        <input type="text" name="account_lastname" id="surname" required value="<%= accountData.account_lastname %>">
+        <label for="email">Email:</label>
+        <input type="email" name="account_email" id="email" required value="<%= accountData.account_email %>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        <button type="submit">Update Account</button>
+    </form>
+    
+</div>
