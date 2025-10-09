@@ -78,6 +78,7 @@ invCont.buildEditVehicle = async function (req, res, next) {
     inv_price: vehicle.inv_price,
     inv_miles: vehicle.inv_miles,
     inv_color: vehicle.inv_color,
+    inv_condition: vehicle.inv_condition,
     inv_cl: classification,
   })
 }
@@ -101,7 +102,7 @@ invCont.buildDeleteVehicle = async function (req, res, next) {
 
 invCont.postVehicle = async function (req, res, next) {
   const nav = await utilities.getNav()
-  const { inv_make, inv_model, inv_description, inv_year, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body  
+  const { inv_make, inv_model, inv_description, inv_year, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, inv_condition, classification_id } = req.body  
   const regResult = await invModel.insertVehicle(
        inv_make, 
        inv_model, 
@@ -112,6 +113,7 @@ invCont.postVehicle = async function (req, res, next) {
        inv_price, 
        inv_miles, 
        inv_color, 
+       inv_condition,
        classification_id
   )    
   if (regResult) {
@@ -145,10 +147,10 @@ invCont.updateVehicle = async function (req, res, next) {
     inv_year,
     inv_miles,
     inv_color,
+    inv_condition,
     classification_id,
   } = req.body
   const updateResult = await invModel.updateVehicle(
-    inv_id,  
     inv_make,
     inv_model,
     inv_description,
@@ -158,7 +160,9 @@ invCont.updateVehicle = async function (req, res, next) {
     inv_year,
     inv_miles,
     inv_color,
-    classification_id
+    inv_condition,
+    classification_id,
+    inv_id,  
   )
 
   if (updateResult) {
@@ -167,6 +171,8 @@ invCont.updateVehicle = async function (req, res, next) {
     res.redirect("/inv/")
   } else {
     const classificationSelect = await utilities.buildClassificationList(classification_id)
+    const inv_cl = await classModel.getClassificationById(classification_id)
+    const classifications = await classModel.getClassifications()
     const itemName = `${inv_make} ${inv_model}`
     req.flash("notice", "Sorry, the update failed.")
     res.status(501).render("inventory/edit-vehicle", {
@@ -184,7 +190,10 @@ invCont.updateVehicle = async function (req, res, next) {
     inv_price,
     inv_miles,
     inv_color,
-    classification_id
+    inv_condition,
+    inv_cl,
+    classification_id,
+    classifications
     })
   }
 }

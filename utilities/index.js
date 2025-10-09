@@ -60,7 +60,14 @@ Util.buildClassificationGrid = async function(data){
       + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
       grid += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>' 
+      grid += '<div class="condition-container">'
+      grid += '<div class="condition-box" data-level="1"></div>' 
+      grid += '<div class="condition-box" data-level="2"></div>' 
+      grid += '<div class="condition-box" data-level="3"></div>' 
+      grid += '<div class="condition-box" data-level="4"></div>' 
+      grid += '<div class="inv-condition hidden">' + vehicle.inv_condition +'</div>'
+      grid += '</div>'
       grid += '</div>'
       grid += '</li>'
     })
@@ -83,6 +90,7 @@ Util.buildDetailView = async function (data) {
   grid += '<p><span>Description</span>: ' + data.inv_description + '</p>'
   grid += '<p class="bg-highlight"><span>Color</span>: ' + data.inv_color + '</p>'
   grid += '<p><span>Miles</span>: ' + new Intl.NumberFormat('en-US').format(data.inv_miles) + '</p>'
+  grid += '<p class="bg-highlight"><span>Condition</span>: ' + data.inv_condition + '</p>'
   grid += '</div>'
   grid += '</div>'
 

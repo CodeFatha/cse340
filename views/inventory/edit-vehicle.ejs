@@ -41,6 +41,13 @@
         <input type="number" name="inv_miles" id="miles" required value="<%= inv_miles %>">
         <label for="color">Color<span>*</span></label>
         <input type="text" name="inv_color" id="color" required value="<%= inv_color %>">
+        <select name="inv_condition" id="condition-select" required>
+            <option value="<%= inv_condition %>" selected><%= inv_condition %></option>
+            <option value="Bad">Bad</option>
+            <option value="Fair">Fair</option>
+            <option value="Good">Good</option>
+            <option value="Excellent">Excellent</option>
+        </select>
         <button type="submit">Update Vehicle</button>
     </form>
 </div>

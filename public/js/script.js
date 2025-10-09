@@ -2,8 +2,21 @@
 const detailImage = document.querySelector('.image');
 const detailInfo = document.querySelector('.info');
 const detail = document.querySelector('.detail');
+const containers = document.querySelectorAll('.condition-container');
 
 // generateCatalog();
+
+
+containers.forEach(container => {
+    const boxes = container.querySelectorAll('.condition-box');
+    const condition = container.querySelector('.inv-condition');
+    
+    boxes.forEach((box, index) => {
+        const level = getLevel(condition.textContent);
+        box.classList.toggle('active', index < level)
+    });
+});
+
 
 async function generateCatalog() {
     // let response = await fetch('/api/games');
@@ -52,4 +65,23 @@ function populateDetail(imageSrc, infoText) {
     detailInfo.appendChild(mileage);
     detail.appendChild(detailImage);
     detail.appendChild(detailInfo);
+}
+
+function getLevel(level) {
+    switch (level) {
+    case 'Excellent':
+        level = 4;
+        break;
+    case 'Good':
+        level = 3;
+        break;
+    case 'Fair':
+        level = 2;
+        break;
+    default:
+        level = 1
+        break;
+    }
+
+    return level;
 }

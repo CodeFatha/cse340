@@ -38,6 +38,14 @@
         <input type="number" name="inv_miles" id="miles" required placeholder="Current odometer reading">
         <label for="color">Color<span>*</span></label>
         <input type="text" name="inv_color" id="color" required placeholder="Color of the vehicle">
+        <label for="condition-select">Condition<span>*</span></label>
+        <select name="inv_condition" id="condition-select" required>
+            <option value="" disabled selected hidden>Select vehicle condition</option>
+            <option value="Bad">Bad</option>
+            <option value="Fair">Fair</option>
+            <option value="Good">Good</option>
+            <option value="Excellent">Excellent</option>
+        </select>
         <button type="submit">Add Vehicle</button>
     </form>
 </div>

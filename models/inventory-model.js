@@ -33,19 +33,16 @@ async function getInventoryById(inventory_id) {
   }
 }
 
-async function insertVehicle(inv_make, inv_model, inv_description, inv_year, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) {
+async function insertVehicle(inv_make, inv_model, inv_description, inv_year, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, inv_condition, classification_id) {
   if (!inv_image) {
     inv_image = '/images/vehicles/no-image.png'
   }
   if (!inv_thumbnail) {
     inv_thumbnail = '/images/vehicles/no-image-tn.png'
   }
-  console.log(`Classification ID: ${classification_id}`)
-  console.log(`Image: ${inv_image}`)
-  console.log(`Thumbnail: ${inv_thumbnail}`)
   try {
-    const sql = "INSERT INTO inventory (inv_make, inv_model, inv_description, inv_year, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
-    return await pool.query(sql, [inv_make, inv_model, inv_description, inv_year, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id])
+    const sql = "INSERT INTO inventory (inv_make, inv_model, inv_description, inv_year, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, inv_condition, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *"
+    return await pool.query(sql, [inv_make, inv_model, inv_description, inv_year, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, inv_condition, classification_id])
   } catch (error) {
     return error.message
   }
@@ -55,7 +52,6 @@ async function insertVehicle(inv_make, inv_model, inv_description, inv_year, inv
  *  Update Inventory Data
  * ************************** */
 async function updateVehicle(
-  inv_id,
   inv_make,
   inv_model,
   inv_description,
@@ -65,11 +61,13 @@ async function updateVehicle(
   inv_year,
   inv_miles,
   inv_color,
-  classification_id
+  inv_condition,
+  classification_id,
+  inv_id,
 ) {
   try {
     const sql =
-      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *"
+      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9,  inv_condition = $10, classification_id = $11 WHERE inv_id = $12 RETURNING *"
     const data = await pool.query(sql, [
       inv_make,
       inv_model,
@@ -80,6 +78,7 @@ async function updateVehicle(
       inv_year,
       inv_miles,
       inv_color,
+      inv_condition,
       classification_id,
       inv_id
     ])
