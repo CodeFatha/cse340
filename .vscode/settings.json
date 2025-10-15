@@ -10,8 +10,8 @@
             "previewLimit": 50,
             "server": "localhost",
             "driver": "PostgreSQL",
-            "name": "render.com",
-            "connectString": "postgresql://nqobile_db:yylFFMZt4DsOcJ2VtvfUFwvQmk5ODCvU@dpg-d3378dumcj7s73a4frng-a.frankfurt-postgres.render.com/nqobile_db"
+            "name": "render",
+            "connectString": "postgresql://cse_340_db:PJyYAbSoD4e4G5JZg2RLDUkoY633taZI@dpg-d3nvpdeuk2gs73djvsa0-a.frankfurt-postgres.render.com/cse_340_db_8ekx"
         }
     ]
 }
